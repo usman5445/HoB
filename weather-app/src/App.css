@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.App {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.card{
+  position: relative;
+    width: 360px;
+    height: 640px;
+    background: linear-gradient(180deg, rgba(28, 153, 223, 0.57) 2.08%, rgba(50, 181, 255, 0.1482) 81.77%);
+    mix-blend-mode: normal;
+    border-radius: 45px;
+}
+
+#tempMain{
+  position: absolute;
+  width: 120px;
+  height: 75px;
+  left: 20px;
+  top: 35px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 75px;
+  /* identical to box height */
+  color: #FFFFFF;
+}
+
+#top-div{
+    position: absolute;
+    width: 90px;
+    height: 0px;
+    left: 105px;
+    top: 55px;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    opacity: 1;
+    transform: rotate(90deg);
+}
+#weatherType{
+  position: absolute;
+    width: 99px;
+    height: 42px;
+    left: 185px;
+    top: 25px;
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+  
+    color: #FFFFFF;
+}
+
+input {
+  position: absolute;
+    width: 177px;
+    height: 42px;
+    /* left: 120px; */
+    top: 80px;
+    right:20px;
+    color: black !important;
+    background: rgba(254, 254, 255, 0.3);
+    border-radius: 10px;
+}
+
+#main-img{
+  position: absolute;
+    width: 165px;
+    height: 156px;
+    left: 95px;
+    top: 152px;
+    mix-blend-mode: normal;
+}
+
+#date{
+  position: absolute;
+    width: 199px;
+    height: 84px;
+    left: 87px;
+    top: 344px;
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+  
+    color: #7DA6BB;
+}
+
+#time{
+  position: absolute;
+    width: 61px;
+    height: 28px;
+    left: 151px;
+    top: 428px;
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  
+    color: #7DA6BB;
+}
+
+.nightMode{
+  color: white !important;
+  
+}
