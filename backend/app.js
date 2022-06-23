@@ -9,11 +9,11 @@ http
       https
         .get(
           {
-            hostname: "humourbaba1.myshopify.com",
-            path: "/admin/api/2022-04/products.json",
+            hostname: process.env.REACT_APP_API_HOSTNAME,
+            path: process.env.REACT_APP_API_PATH,
             headers: {
               "X-Shopify-Access-Token":
-                "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",
+              process.env.REACT_APP_API_ACCESS_TOKEN,
             },
           },
           (response) => {
