@@ -1,47 +1,41 @@
-
 import "./App.css";
 import productRequest from "./api/products";
 import orderRequest from "./api/orders";
-
-
-
-import React, { useEffect } from 'react'
+import ProductPage from "./components/products";
+import React, { useEffect } from "react";
 
 const App = () => {
-const getproducts=async()=>{
-  try {
-    const response=await productRequest();
-    console.log(response);
-  } catch (error) {
-    console.log(error.message);
-  }
+  const getproducts = async () => {
+    try {
+      const response = await productRequest();
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const getorders = async () => {
+    try {
+      const response = await orderRequest();
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-}
-const getorders=async()=>{
-  try {
-    const response=await orderRequest();
-    console.log(response);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-}
-
-useEffect(()=>{
-  getproducts();
-  getorders();
-},[])
+  useEffect(() => {
+    getproducts();
+    getorders();
+  }, []);
   return (
     <div>
-      <button onClick={getproducts}>Make Products Request</button>
-      <button onClick={getorders}>Make Orders Request</button>
+      {/* <button onClick={getproducts}>Make Products Request</button>
+      <button onClick={getorders}>Make Orders Request</button> */}
+      <ProductPage />
     </div>
-  )
-}
+  );
+};
 
-export default App
-
-
+export default App;
 
 // function App() {
 //   function productRequest() {
