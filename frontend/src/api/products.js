@@ -1,12 +1,10 @@
 import axios from "axios";
 
-
-export default function productRequest() {
-      axios
-        .get("/products")
-        .then((resp) => console.log(resp))
-        .catch((err) => console.log(err));
-    }
-
-   
- 
+export const productRequest = async () => {
+  try {
+    const data = await axios.get("/products");
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

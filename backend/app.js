@@ -9,11 +9,11 @@ http
       https
         .get(
           {
-            hostname: process.env.REACT_APP_API_HOSTNAME,
-            path: process.env.REACT_APP_API_PATH,
+            hostname: "humourbaba1.myshopify.com",
+            path: "/admin/api/2022-04/products.json",
             headers: {
               "X-Shopify-Access-Token":
-              process.env.REACT_APP_API_ACCESS_TOKEN,
+                "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 ",
             },
           },
           (response) => {
@@ -38,7 +38,7 @@ http
             path: "/admin/api/2022-04/orders.json",
             headers: {
               "X-Shopify-Access-Token":
-                "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",
+                "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 ",
             },
           },
           (response) => {
