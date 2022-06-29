@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  width: 100%;
+}
+*{
+  margin: 0%;
+padding: 0%;
 }
 
 .App-logo {
@@ -37,11 +42,3 @@
   }
 }
 
-button{
-  font-size: 24px;
-  margin: 10px 10px;
-  padding: 10px 10px;
-  border-radius: 7px;
-  /* color: white; */
-  background-color: #FFC54D;
-}
