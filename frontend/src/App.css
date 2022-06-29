@@ -7,6 +7,7 @@
 padding: 0%;
 }
 
+<<<<<<< HEAD
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -42,3 +43,13 @@ padding: 0%;
   }
 }
 
+=======
+button{
+  font-size: 24px;
+  margin: 10px 10px;
+  padding: 10px 10px;
+  border-radius: 7px;
+  /* color: white; */
+  background-color: #FFC54D;
+}
+>>>>>>> main

@@ -1,9 +1,18 @@
 import React from "react";
+<<<<<<< HEAD
 import "./products.css"
 import "bootstrap/dist/css/bootstrap.css";
 import { productRequest } from "../../api/products";
 import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
+=======
+import "../components/products.css";
+import "bootstrap/dist/css/bootstrap.css";
+import slider from "../images/Slider.svg";
+import blackTshirt from "../images/black.svg";
+import { productRequest } from "../api/products";
+import { useEffect, useState } from "react";
+>>>>>>> main
 
 function ProductPage() {
   const [products, setproducts] = useState([]);
@@ -31,7 +40,11 @@ function ProductPage() {
       <div className="productsFilter">
         <div id="fliter">FILTER & SORT</div>
         <div id="slider">
+<<<<<<< HEAD
           {/* <img src={slider}></img> */}
+=======
+          <img src={slider}></img>
+>>>>>>> main
         </div>
         <div id="box"></div>
       </div>
@@ -42,6 +55,7 @@ function ProductPage() {
               <div class="card">
                 {product.images.map((image) => (
                   <div key={image.id}>
+<<<<<<< HEAD
 
 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner card-img-top" >
@@ -64,6 +78,19 @@ function ProductPage() {
 </div>
 ))}
                    
+=======
+                    <img
+                      // src={product.image.src[0]}
+                      className="card-img-top"
+                      alt={image.alt}
+                    ></img>
+                    {/* {console.log(image.src)} */}
+                  </div>
+                ))}
+                {console.log(
+                  product.image.src != null ? product.image.src : "no data"
+                )}
+>>>>>>> main
 
                 <div className="card-body">
                   {/* {console.log(product.image.src)} */}
@@ -74,12 +101,28 @@ function ProductPage() {
               </div>
             </div>
           ))}
+<<<<<<< HEAD
          
         </div>
       </div>
       <Footer/>
     </div>
 
+=======
+          <div className="col-6 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+              <img src={blackTshirt} className="" alt={""}></img>
+              <div className="card-body">
+                <p className="card-text collectionName">Collection Name</p>
+                <p className="card-text productName">Product Name</p>
+                <p className="card-text productPrice">Price</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+>>>>>>> main
   );
 }
 
