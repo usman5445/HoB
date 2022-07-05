@@ -72,7 +72,7 @@ const FeaturedProducts = () => {
 
 <div className='hustlerContainer my-5'>
   <div className='hangerimg'>
-    <img src={hanger} style={{height:"60vh",width:"100%"}}/>
+    <img src={hanger} style={{height:"60vh",width:"100%"}} alt="..."/>
     <div className='hustlerblackcont d-flex   align-items-center' style={{height:"8vh",width:"100vw",background:"black",color:"white",fontSize:"2rem",fontWeight:"800"}}>
     <div className='texthustler mx-3'> for HUSTLERS </div>
     </div> 
@@ -80,7 +80,7 @@ const FeaturedProducts = () => {
     <div className='hustleryellowcont my-2 d-flex  justify-content-center align-items-center' style={{height:"8vh",background:"#FFDF05",color:"#005CFF",fontSize:"2rem",fontWeight:"800"}}>
     <div className='textdreamer'> for DREAMERS</div>
     
-      <img className="and" src={and}></img>
+      <img className="and" src={and} alt="..."></img>
    
     </div> 
     <div className='hustlerredcont my-2 d-flex  align-items-center' style={{height:"8vh",background:"#F90000",color:"white",fontSize:"2rem",fontWeight:"800"}}>

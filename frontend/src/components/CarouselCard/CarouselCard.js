@@ -22,15 +22,15 @@ const CarouselCard = () => {
 
             <div className='symbol container my-4'>
             <span className='starcont mx-1'>
-                <img src={star} alt="..." />
-                <img src={star} alt="..."/>
-                <img src={star} alt="..."/>
-                <img src={star} alt="..."/>
-                <img src={halfstar} alt="..."/>
+                <img src={star} alt="..." style={{width:"1.3rem"}}/>
+                <img src={star} alt="..."style={{width:"1.3rem"}}/>
+                <img src={star} alt="..."style={{width:"1.3rem"}}/>
+                <img src={star} alt="..."style={{width:"1.3rem"}}/>
+                <img src={halfstar} alt="..."style={{width:"0.8rem"}}/>
             </span>
             <span className='commascont   '>
-                <img src={commas} alt="..."/>
-                <img src={commas} alt="..."/>
+                <img src={commas} alt="..." style={{width:"1.5rem"}}/>
+                <img src={commas} alt="..."style={{width:"1.5rem"}}/>
             </span>
             </div>
             <div className='text mx-3 ' style={{textAlign:"start"}}>Extremely versatile t-shirts which can be paired with anything and will make any outfit instantly better! Definitely need more of such quality products! Investing in slow fashion and making my closet more environment-friendly is definitely my new agenda these days. Keep up the good work.</div>

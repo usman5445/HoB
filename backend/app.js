@@ -13,11 +13,7 @@ http
             path: "/admin/api/2022-04/products.json",
             headers: {
               "X-Shopify-Access-Token":
-<<<<<<< HEAD
-              "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",
-=======
-                "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 ",
->>>>>>> main
+              "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"
             },
           },
           (response) => {

@@ -1,38 +1,61 @@
 import "./App.css";
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Home from "./pages/Home";
 import Products from './components/products/products'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useRoutes,
-} from "react-router-dom";
-
-import Sidebar from "./components/Sidebar/Sidebar";
-import Navbar from "./components/Navbar/Navbar";
-import FeaturedProducts from "./components/FeaturedProducts/FeaturedProducts";
-import NavSide from "./components/NavSide/NavSide";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  let routes = useRoutes([
-    { path: "/", element: <Home/> },
-    {path:"/products",element:<Products/>}
-  ]);
-  return routes;
-};
-
-const AppWrapper = () => {
   return (
     <Router>
-      <App />
-    </Router>
-  );
-};
+    <Routes>
+      <Route
+          exact
+          path="/"
+          element={
+           
+              <Home />
+          }
+      />
+      <Route
+          exact
+          path="/admin"
+          element={
+          
+              <Products />
+          }
+      />
+     
+    </Routes>
+  </Router>
+  )
+}
 
-export default AppWrapper;
+export default App
+
+
+
+
+
+
+
+
+// const App = () => {
+//   let routes = useRoutes([
+//     { path: "/", element: <Home/> },
+//     {path:"/products",element:<Products/>}
+//   ]);
+//   return routes;
+// };
+
+// const AppWrapper = () => {
+//   return (
+//     <Router>
+//       <App />
+//     </Router>
+//   );
+// };
+
+// export default AppWrapper;
 
 //   const [products, setproducts] = useState([]);
 //   const getproducts = async () => {
@@ -49,46 +72,6 @@ export default AppWrapper;
 //   useEffect(() => {
 //     getproducts();
 //   }, []);
-=======
-// import productRequest from "./api/products";
-// import orderRequest from "./api/orders";
-import ProductPage from "./components/products";
-import React, { useEffect } from "react";
-
-const App = () => {
-  // const getproducts = async () => {
-  //   try {
-  //     const response = await productRequest();
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-  // const getorders = async () => {
-  //   try {
-  //     const response = await orderRequest();
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getproducts();
-  //   getorders();
-  // }, []);
-
-  return (
-    <div>
-      {/* <button onClick={getproducts}>Make Products Request</button>
-      <button onClick={getorders}>Make Orders Request</button> */}
-      <ProductPage />
-    </div>
-  );
-};
-
-export default App;
->>>>>>> main
 
 //   return (
 //     <div>

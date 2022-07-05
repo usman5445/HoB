@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "https://backend-hob.herokuapp.com",
   "dependencies": {
     "@coreui/coreui": "^4.1.6",
     "@coreui/react": "^4.2.3",
@@ -13,13 +13,12 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
-<<<<<<< HEAD
     "cdbreact": "^1.5.2",
-=======
->>>>>>> main
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gallery-carousel": "^0.2.9",
     "react-pro-sidebar": "^0.7.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-responsive-sidebar": "^0.1.16",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",

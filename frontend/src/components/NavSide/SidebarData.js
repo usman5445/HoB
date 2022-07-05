@@ -1,11 +1,10 @@
-import React from 'react';
-import smile from '../../assests/smilegreylogo.svg';
+
 
 export const SidebarData = [
   {
     title: 'COLLECTION',
     path: '/products',
-        icon: '',
+    icon: '',
     cName: 'nav-text'
   },
   {

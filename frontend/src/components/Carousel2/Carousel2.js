@@ -1,9 +1,5 @@
 import React from 'react'
 import "./Carousel2.css"
-import carousel2img from '../../assests/carousel2img.svg'
-import star from '../../assests/star.svg'
-import halfstar from '../../assests/halfstar.svg'
-import commas from '../../assests/commas.svg'
 import CarouselCard from '../CarouselCard/CarouselCard' 
 const Carousel2 = () => {
   return (
@@ -36,16 +32,3 @@ const Carousel2 = () => {
 }
 
 export default Carousel2
-{/* <div className='carousel2Card d-flex  justify-content-center align-items-center flex-row' style={{width:"100%",height:"100%"}}>
-<div className='leftContainer d-flex  justify-content-center align-items-center flex-column' style={{backgorund:"#FFDF05"}}>
-    <div className='imgcontainer'>
-<img src={star}></img>
-    </div>
-    <div className='namecontainer'>
-
-    </div>
-</div>
-<div className='rightcontainer' style={{backgorund:"#005CFF"}}>
-
-</div>
-</div> */}

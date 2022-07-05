@@ -19,9 +19,9 @@ const Footer = () => {
 
       <div className='follow mt-5 mb-2 '>Follow us</div>
       <div className='socialmedia d-flex  justify-content-center align-items-center flex-row'>
-      <img src={facebook}/>
-      <img src={instagram}/>
-      <img src={twitter}/>
+      <img src={facebook} alt="..."/>
+      <img src={instagram} alt="..."/>
+      <img src={twitter} alt="..."/>
       </div>
     </div>
   )

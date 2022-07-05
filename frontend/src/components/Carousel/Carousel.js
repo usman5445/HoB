@@ -3,7 +3,6 @@ import image1 from "../../assests/image-1.svg"
 import image2 from "../../assests/image-2.svg"
 import image3 from "../../assests/image-3.svg"
 import image4 from "../../assests/image-4.svg"
-import button from "../../assests/MainButton.svg"
 import group from "../../assests/Group.svg"
 
 const Carousel = () => {
@@ -19,18 +18,18 @@ const Carousel = () => {
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
       </div>
       <div className="carousel-inner" style={{height:"100%"}}>
-    <div className="carousel-item active" data-bs-interval="2000"style={{height:"100%"}} >
-        <img className="d-block w-90 h-100" src={image1} />
+    <div className="carousel-item active" data-bs-interval="2000" >
+        <img className="d-block w-90 h-100" src={image1} alt="..."/>
     </div>
     <div className="carousel-item" data-bs-interval="2000">
-    <img  className="d-block w-90 h-100" src={image2} />
+    <img  className="d-block w-90 h-100" src={image2} alt="..."/>
     </div>
      <div className="carousel-item" data-bs-interval="2000">
-    <img className="d-block w-90 h-100" src={image3} />
+    <img className="d-block w-90 h-100" src={image3} alt="..." />
      
     </div>
     <div className="carousel-item"data-bs-interval="2000">
-    <img className="d-block w-90 h-100" src={image4} />
+    <img className="d-block w-90 h-100" src={image4} alt="..." />
      
     </div>
   
@@ -74,7 +73,7 @@ const Carousel = () => {
 
 
 <div className='intro d-flex  justify-content-center align-items-center flex-column' style={{height:"100vh",background:"black"}}>
-<img src={group}/>
+<img src={group} alt="..."/>
 <div className='intro heading mx-5' style={{fontSize:"1.8rem",color:"white",fontWeight:"700",textAlign:"start"}}>“INDIA’S FIRST SUSTAINABLE FASHION AND LIFESTYLE COMMUNITY FOR THE YOUTH” </div>
 <button type="button" className="btn btn-primary knowmore " style={{background:"black",marginTop:"1.3rem",borderColor:"white",borderWidth:"3px",width:"9rem",height:"3.7rem",fontSize:"1.1rem"}}>Know More</button>
 </div>

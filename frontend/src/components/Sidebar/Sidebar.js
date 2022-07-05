@@ -1,8 +1,7 @@
 import '@coreui/coreui/dist/css/coreui.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { CSidebar,CSidebarBrand,CSidebarNav,CNavItem,CNavTitle,CIcon,CBadge,CNavGroup,CSidebarToggler,CButton ,CCollapse,CCard,CCardBody} from '@coreui/react'
+import { CSidebar,CSidebarBrand,CSidebarNav,CNavItem,CNavTitle,CBadge,CNavGroup,CSidebarToggler} from '@coreui/react'
 import logo from "../../assests/logo.svg"
-import { useState } from 'react'
 
 
 import React from 'react'
@@ -20,7 +19,7 @@ const Sidebar = () => {
     <CSidebar style={{ height: "100vh", background: "white" }}>
     
   <CSidebarBrand style={{color:"black",background:"white"}}>
-    <img src={logo}></img>
+    <img src={logo} alt="..."></img>
   </CSidebarBrand>
   <CSidebarNav style={{top:"20%",color:"black"}}>
     <CNavTitle style={{color:"black"}}>Nav Title</CNavTitle>
