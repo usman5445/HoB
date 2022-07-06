@@ -41,13 +41,3 @@ padding: 0%;
     transform: rotate(360deg);
   }
 }
-
-button{
-  font-size: 24px;
-  margin: 10px 10px;
-  padding: 10px 10px;
-  border-radius: 7px;
-  /* color: white; */
-  background-color: #FFC54D;
-}
-

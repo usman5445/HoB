@@ -1,14 +1,14 @@
 import React from "react";
-import "./products.css"
+import "./products.css";
 import "bootstrap/dist/css/bootstrap.css";
 // import Carousel from 'react-gallery-carousel';
-import 'react-gallery-carousel/dist/index.css';
+import "react-gallery-carousel/dist/index.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 import { productRequest } from "../../api/products";
 import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
-import slider from "../../assests/Slider.svg"
+import slider from "../../assests/Slider.svg";
 
 function ProductPage() {
   const [products, setproducts] = useState([]);
@@ -45,21 +45,17 @@ function ProductPage() {
           {products.map((product) => (
             <div className="col-6 col-sm-6 col-md-4 col-lg-3">
               <div class="card">
-              <Carousel  showThumbs={false}>
-                   
-
-                {product.images.map((image) => (
-                   <div>
-                  <img src={image.src} className="d-block w-100 "
-                      alt={image.alt}/>
-  </div>
-  
-  
- 
- ))}
-   
+                <Carousel showThumbs={false}>
+                  {product.images.map((image) => (
+                    <div>
+                      <img
+                        src={image.src}
+                        className="d-block w-100 "
+                        alt={image.alt}
+                      />
+                    </div>
+                  ))}
                 </Carousel>
-                   
 
                 <div className="card-body">
                   {/* {console.log(product.image.src)} */}
@@ -70,12 +66,10 @@ function ProductPage() {
               </div>
             </div>
           ))}
-         
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-
   );
 }
 

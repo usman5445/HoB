@@ -84,3 +84,7 @@ hr{
     border: 2px solid black;
 
 }
+
+.navigation-items{
+    padding-left: 0px;
+}
