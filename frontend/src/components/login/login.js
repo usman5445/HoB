@@ -2,10 +2,30 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import loginBanner from "../../assests/loginBanner.svg";
 import "./login.css";
+import { Modal } from "react-bootstrap";
+import Registration from "../registration/registration";
 import googleicon from "../../assests/icons8-google-18.svg";
 import facebookicon from "../../assests/icons8-facebook-18.svg";
+import set from "../../components/login/login";
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton></Modal.Header>
+      <Modal.Body>
+        <Registration />
+      </Modal.Body>
+    </Modal>
+  );
+}
 
 function Login() {
+  const [registershow, setregisterShow] = React.useState(false);
+
   return (
     <div className="container-fluid ">
       <div className="row banner">
@@ -54,9 +74,17 @@ function Login() {
       </div>
 
       <div className="row d-flex justify-content-center ">
-        <button class="btn btn-register" type="button">
+        <button
+          class="btn btn-register"
+          type="button"
+          onClick={() => setregisterShow(true)}
+        >
           REGISTER
         </button>
+        <MyVerticallyCenteredModal
+          show={registershow}
+          onHide={() => setregisterShow(false)}
+        />
       </div>
     </div>
   );
