@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { SidebarData } from "./SidebarData";
 import "./NavSide.css";
+import { Modal } from "react-bootstrap";
+import Login from "../../components/login/login";
 import burgermenu from "../../assests/Burger Menu.svg";
 import Search from "../../assests/Search.svg";
 import heart from "../../assests/Outline-Heart.svg";
@@ -8,7 +10,25 @@ import cart from "../../assests/Empty.svg";
 import cross from "../../assests/X.svg";
 import smile from "../../assests/smilegreylogo.svg";
 import logo from "../../assests/logo.svg";
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton></Modal.Header>
+      <Modal.Body>
+        <Login />
+      </Modal.Body>
+    </Modal>
+  );
+}
+
 const NavSide = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -70,7 +90,13 @@ const NavSide = () => {
             <hr />
           </div>
           <div className="lastCont">
-            <div className="MyAccount">MY ACCOUNT</div>
+            <div className="MyAccount" onClick={() => setModalShow(true)}>
+              MY ACCOUNT
+            </div>
+            <MyVerticallyCenteredModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+            />
           </div>
         </div>
       </nav>
