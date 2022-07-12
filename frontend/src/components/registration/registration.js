@@ -5,8 +5,12 @@ import "./registration.css";
 import googleicon from "../../assests/icons8-google-18.svg";
 import facebookicon from "../../assests/icons8-facebook-18.svg";
 import { registerCust } from "../../api/customers";
-
+import useForm from "../Hooks/useForm";
 function Registration() {
+  const formlogin = () => {
+    console.log("Form Submitted VALUES ", values);
+  };
+
   const [fNameRef, lNameRef, emailRef, passRef] = [
     useRef(),
     useRef(),
@@ -14,6 +18,9 @@ function Registration() {
     useRef(),
   ];
 
+  const { handleChange, values, errors, handleSubmit } = useForm(formlogin);
+  // console.log("Form Values", values);
+  console.log("Form Errors", errors);
   function handleRegister() {
     const data = {
       first_name: fNameRef.current.value,
@@ -48,38 +55,60 @@ function Registration() {
       </div>
       <div className="row d-flex justify-content-center text-or">OR</div>
       <div className="row d-flex justify-content-center ">
-        <div className="row  input-group input-group-lg text-start">
-          <input
-            ref={fNameRef}
-            type="text"
-            class="form-control"
-            placeholder="First Name"
-          />
-        </div>
-        <div className="row  input-group input-group-lg">
-          <input
-            ref={lNameRef}
-            type="text"
-            class="form-control text-start"
-            placeholder="Last Name"
-          />
-        </div>
-        <div className="row input-group input-group-lg ">
-          <input
-            ref={emailRef}
-            type="email"
-            class="form-control"
-            placeholder=" Email ID "
-          />
-        </div>
-        <div className="row  input-group input-group-lg">
-          <input
-            ref={passRef}
-            type="password"
-            class="form-control"
-            placeholder="Password"
-          />
-        </div>
+        <form
+          className="row d-flex justify-content-center"
+          onSubmit={handleSubmit}
+        >
+          <div className="row  input-group input-group-lg ">
+            <input
+              ref={fNameRef}
+              type="text"
+              class="form-control"
+              name="FirstName"
+              placeholder="First Name"
+              onChange={handleChange}
+            />
+            {errors.firstName && (
+              <small className="text-danger">{errors.firstName}</small>
+            )}
+          </div>
+          <div className="row  input-group input-group-lg">
+            <input
+              ref={lNameRef}
+              type="text"
+              class="form-control text-start"
+              name="LastName"
+              placeholder="Last Name"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="row input-group input-group-lg ">
+            <input
+              ref={emailRef}
+              type="email"
+              name="Email"
+              class="form-control"
+              placeholder=" Email ID "
+              onChange={handleChange}
+            />
+            {errors.email && (
+              <small className="text-danger">{errors.email}</small>
+            )}
+          </div>
+          <div className="row  input-group input-group-lg">
+            <input
+              ref={passRef}
+              type="password"
+              name="Password"
+              class="form-control"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+            {errors.password && (
+              <small className="text-danger">{errors.password}</small>
+            )}
+          </div>
+        </form>
       </div>
       <div className="row d-flex justify-content-center text-login">
         Receive Updates in Email
