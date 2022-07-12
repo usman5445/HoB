@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import loginBanner from "../../assests/registrationBanner.svg";
 import "./registration.css";
 import googleicon from "../../assests/icons8-google-18.svg";
 import facebookicon from "../../assests/icons8-facebook-18.svg";
+import { registerCust } from "../../api/customers";
 
 function Registration() {
+  const [fNameRef, lNameRef, emailRef, passRef] = [
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+  ];
+
+  function handleRegister() {
+    const data = {
+      first_name: fNameRef.current.value,
+      last_name: lNameRef.current.value,
+      email: emailRef.current.value,
+      password: passRef.current.value,
+    };
+
+    registerCust(data);
+  }
+
   return (
     <div className="container-fluid ">
       <div className="row banner">
@@ -30,27 +49,43 @@ function Registration() {
       <div className="row d-flex justify-content-center text-or">OR</div>
       <div className="row d-flex justify-content-center ">
         <div className="row  input-group input-group-lg text-start">
-          <input type="text" class="form-control" placeholder="First Name" />
+          <input
+            ref={fNameRef}
+            type="text"
+            class="form-control"
+            placeholder="First Name"
+          />
         </div>
         <div className="row  input-group input-group-lg">
           <input
+            ref={lNameRef}
             type="text"
             class="form-control text-start"
             placeholder="Last Name"
           />
         </div>
         <div className="row input-group input-group-lg ">
-          <input type="email" class="form-control" placeholder=" Email ID " />
+          <input
+            ref={emailRef}
+            type="email"
+            class="form-control"
+            placeholder=" Email ID "
+          />
         </div>
         <div className="row  input-group input-group-lg">
-          <input type="password" class="form-control" placeholder="Password" />
+          <input
+            ref={passRef}
+            type="password"
+            class="form-control"
+            placeholder="Password"
+          />
         </div>
       </div>
       <div className="row d-flex justify-content-center text-login">
         Receive Updates in Email
       </div>
       <div className="row d-flex justify-content-center ">
-        <button class="btn btn-register" type="button">
+        <button onClick={handleRegister} class="btn btn-register" type="button">
           REGISTER
         </button>
       </div>
