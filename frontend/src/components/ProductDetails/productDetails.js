@@ -56,6 +56,34 @@ export const ProductDetails = () => {
                     />
                   </div>
                 ))} */}
+                <div>
+                  <img
+                    src={product.images[0].src}
+                    className="d-block w-100 "
+                    alt={product.images[0].alt}
+                  />
+                </div>
+                <div>
+                  <img
+                    src={product.images[1].src}
+                    className="d-block w-100 "
+                    alt={product.images[1].alt}
+                  />
+                </div>
+                <div>
+                  <img
+                    src={product.images[2].src}
+                    className="d-block w-100 "
+                    alt={product.images[2].alt}
+                  />
+                </div>
+                <div>
+                  <img
+                    src={product.images[3].src}
+                    className="d-block w-100 "
+                    alt={product.images[3].alt}
+                  />
+                </div>
               </Carousel>
 
               <div className="card-body">
@@ -71,11 +99,11 @@ export const ProductDetails = () => {
                 <p className=" productName">{product.title}</p>
                 <p className=" productcomparePrice">
                   &#8377;
-                  {/* {product.variants[0].compare_at_price} */}
+                  {product.variants[0].compare_at_price}
                 </p>
                 <p className="card-text productPrice">
                   &#8377;
-                  {/* {product.variants[0].price} */}
+                  {product.variants[0].price}
                 </p>
               </div>
             </div>
