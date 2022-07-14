@@ -57,11 +57,13 @@ function ProductPage() {
                   ))}
                 </Carousel>
 
-                <div className="card-body">
-                  {/* {console.log(product.image.src)} */}
+                <div className="card-body" key={product.id}>
                   <p className="card-text collectionName">Collection Name</p>
                   <p className="card-text productName">{product.title}</p>
-                  <p className="card-text productPrice">Price</p>
+                  <p className="card-text productPrice">
+                    {"\u20B9"}
+                    {product.variants[0].price}
+                  </p>
                 </div>
               </div>
             </div>
