@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import loginBanner from "../../assests/registrationBanner.svg";
 import "./registration.css";
@@ -6,11 +6,17 @@ import googleicon from "../../assests/icons8-google-18.svg";
 import facebookicon from "../../assests/icons8-facebook-18.svg";
 import { registerCust } from "../../api/customers";
 import useForm from "../Hooks/useForm";
+import { AlertComponent } from "../AlertComponent";
 function Registration() {
   const formlogin = () => {
     console.log("Form Submitted VALUES ", values);
   };
-
+  const [alertData, setAlertData] = useState({
+    isOpen: false,
+    message: { heading: "", message: "" },
+    variant: "success",
+  });
+  const [loading, setLoading] = useState(false);
   const [fNameRef, lNameRef, emailRef, passRef] = [
     useRef(),
     useRef(),
@@ -21,7 +27,8 @@ function Registration() {
   const { handleChange, values, errors, handleSubmit } = useForm(formlogin);
   // console.log("Form Values", values);
   console.log("Form Errors", errors);
-  function handleRegister() {
+  async function handleRegister() {
+    setLoading(true);
     const data = {
       first_name: fNameRef.current.value,
       last_name: lNameRef.current.value,
@@ -29,7 +36,28 @@ function Registration() {
       password: passRef.current.value,
     };
 
-    registerCust(data);
+    await registerCust(data)
+      .then((resp) => {
+        setLoading(false);
+        setAlertData({
+          isOpen: true,
+          variant: "success",
+          message: {
+            heading: "Registration Successful.",
+          },
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setAlertData({
+          isOpen: true,
+          variant: "danger",
+          message: {
+            heading: "ohh! Something went wrong",
+            message: err.response.data.errors,
+          },
+        });
+      });
   }
 
   return (
@@ -113,9 +141,15 @@ function Registration() {
       <div className="row d-flex justify-content-center text-login">
         Receive Updates in Email
       </div>
+      <AlertComponent data={alertData} setData={setAlertData} />
       <div className="row d-flex justify-content-center ">
-        <button onClick={handleRegister} class="btn btn-register" type="button">
-          REGISTER
+        <button
+          disabled={loading}
+          onClick={handleRegister}
+          class="btn btn-register"
+          type="button"
+        >
+          {!loading ? "REGISTER" : "Registering..."}
         </button>
       </div>
       <div className="row d-flex justify-content-center text-login">
