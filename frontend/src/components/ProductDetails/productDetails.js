@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Carousel } from "react-responsive-carousel";
 import Footer from "../Footer/Footer";
 import Carousel2 from "../Carousel2/Carousel2";
-import { productRequest } from "../../api/products";
+import { productRequest, singleProductRequest } from "../../api/products";
 import { useEffect, useState } from "react";
 import smilelogo from "../../assests/smilelogo.svg";
 import smilegreylogo from "../../assests/smilegreylogo.svg";
 import smileblacklogo from "../../assests/smileblacklogo.svg";
 import Sharebtn from "../../assests/Share Rounded.svg";
 import "../ProductDetails/productDetails.css";
-
+import { useParams } from "react-router-dom";
 export const ProductDetails = () => {
   let [count, setCount] = useState(0);
-
+  const [product, setProduct] = useState();
+  const bodyRef = useRef();
+  const [price, setPrice] = useState({
+    compare_at_price: null,
+    price: null,
+  });
+  const { id } = useParams();
+  let parcer = new DOMParser();
   function incrementCount() {
     count = count + 1;
     setCount(count);
@@ -21,22 +28,31 @@ export const ProductDetails = () => {
     count = count - 1;
     setCount(count);
   }
-  const [product, setproducts] = useState([]);
   const getproducts = async () => {
+    console.log(id);
     try {
-      const response = await productRequest();
-      // console.log(response.data);
-      console.log(response.data.products[0]);
-      setproducts(response.data.products[0]);
+      const response = await singleProductRequest(id);
+      console.log(response.data);
+      setProduct(response.data.product);
+      setPrice({
+        ...price,
+        compare_at_price: product.variants[0].compare_at_price,
+        price: product.variants[0].price,
+      });
     } catch (error) {
       console.log(error.message);
     }
   };
-
+  useEffect(() => {
+    setPrice({
+      compare_at_price: product?.variants[0].compare_at_price,
+      price: product?.variants[0].price,
+    });
+    bodyRef.current.innerHTML = product?.body_html;
+  }, [product]);
   useEffect(() => {
     getproducts();
   }, []);
-
   return (
     <div className="product-container">
       <div className="product-detailHead text-center">
@@ -47,7 +63,7 @@ export const ProductDetails = () => {
           <div className="">
             <div class="card">
               <Carousel showThumbs={false}>
-                {/* {product.images.map((image) => (
+                {product?.images?.map((image) => (
                   <div>
                     <img
                       src={image.src}
@@ -55,35 +71,7 @@ export const ProductDetails = () => {
                       alt={image.alt}
                     />
                   </div>
-                ))} */}
-                <div>
-                  <img
-                    src={product.images[0].src}
-                    className="d-block w-100 "
-                    alt={product.images[0].alt}
-                  />
-                </div>
-                <div>
-                  <img
-                    src={product.images[1].src}
-                    className="d-block w-100 "
-                    alt={product.images[1].alt}
-                  />
-                </div>
-                <div>
-                  <img
-                    src={product.images[2].src}
-                    className="d-block w-100 "
-                    alt={product.images[2].alt}
-                  />
-                </div>
-                <div>
-                  <img
-                    src={product.images[3].src}
-                    className="d-block w-100 "
-                    alt={product.images[3].alt}
-                  />
-                </div>
+                ))}
               </Carousel>
 
               <div className="card-body">
@@ -96,14 +84,14 @@ export const ProductDetails = () => {
                     Share
                   </span>
                 </p>
-                <p className=" productName">{product.title}</p>
+                <p className=" productName">{product?.title}</p>
                 <p className=" productcomparePrice">
                   &#8377;
-                  {product.variants[0].compare_at_price}
+                  {price.compare_at_price}
                 </p>
                 <p className="card-text productPrice">
                   &#8377;
-                  {product.variants[0].price}
+                  {price.price}
                 </p>
               </div>
             </div>
@@ -119,81 +107,39 @@ export const ProductDetails = () => {
         </div>
 
         <div className="row size-box">
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="XS"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="XS">
-            XS
-          </label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="S"
-            // autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="S">
-            S
-          </label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="M"
-            // autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="M">
-            M
-          </label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="L"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="L">
-            L
-          </label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="XL"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="XL">
-            XL
-          </label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="2XL"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="2XL">
-            2XL
-          </label>
-          <input
-            type="radio"
-            class="btn-check"
-            name="options-outlined"
-            id="3XL"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-dark size-btn" for="3XL">
-            3XL
-          </label>
+          {product?.variants?.map((variant, index) => {
+            return (
+              <>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id={variant.title}
+                  key={index}
+                  defaultChecked={
+                    !price.compare_at_price && index == 0 ? true : false
+                  }
+                  onChange={(e) => {
+                    e.target.checked == true &&
+                      setPrice({
+                        compare_at_price: variant.compare_at_price,
+                        price: variant.price,
+                      });
+                  }}
+                />
+                <label
+                  class="btn btn-outline-dark size-btn"
+                  htmlFor={variant.title}
+                >
+                  {variant.title}
+                </label>
+              </>
+            );
+          })}
         </div>
       </div>
       <div className="row product-quality-text">
-        <p className="quality-text">
+        {/* <p className="quality-text">
           <strong>
             Crafted in Cotton and having a funky pattern, with Pull On closure,
             this T-shirt has Half Sleeve and a Round Collar and is definitely a
@@ -234,7 +180,8 @@ export const ProductDetails = () => {
               </p>
             </li>
           </ul>
-        </p>
+        </p>*/}
+        <div ref={bodyRef}></div>
         <p className="color-disclaimer">
           <strong> Disclaimer:</strong> Due To The Different Monitor And Light
           Effect, The Actual Color Of The Item Might Be Slightly Different From
