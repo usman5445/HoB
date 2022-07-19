@@ -49,9 +49,9 @@ function ProductPage() {
         <div id="box"></div>
       </div>
       <div className="products">
-        <div className="row">
+        <div className="row productCard">
           {products.map((product) => (
-            <div className="col-6 col-sm-6 col-md-4 col-lg-3">
+            <div className="col-6 col-sm-6 col-md-4 col-lg-3 productCard">
               <div class="card">
                 <Carousel showThumbs={false}>
                   {product.images.map((image) => (
