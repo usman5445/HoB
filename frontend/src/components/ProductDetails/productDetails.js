@@ -138,6 +138,51 @@ export const ProductDetails = () => {
             );
           })}
         </div>
+
+        <div className="row color-box">
+          <div className="color-box-heading">Colour</div>
+          <input
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="black"
+            autocomplete="off"
+          />
+          <label class="color-btn btn-dark" for="black"></label>
+
+          <input
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="blue"
+            autocomplete="off"
+          />
+          <label class="color-btn btn-primary" for="blue"></label>
+          <input
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="red"
+            autocomplete="off"
+          />
+          <label class="color-btn btn-danger" for="red"></label>
+          <input
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="yellow"
+            autocomplete="off"
+          />
+          <label class="color-btn btn-warning" for="yellow"></label>
+          <input
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="grey"
+            autocomplete="off"
+          />
+          <label class="color-btn btn-secondary" for="grey"></label>
+        </div>
       </div>
       <div className="row product-quality-text">
         <p className="quality-text">
@@ -192,6 +237,8 @@ export const ProductDetails = () => {
       <div className=" row shipping-disclaimertext text-center">
         Free shipping on orders above ₹5000 Delivery in 5-7 business days.
       </div>
+
+      <div className="review-heading text-center">CUSTOMER REVIEWS</div>
       <Carousel2 />
 
       <div
