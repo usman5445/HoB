@@ -19,6 +19,7 @@ export const ProductDetails = () => {
     compare_at_price: null,
     price: null,
   });
+
   const { id } = useParams();
   let parcer = new DOMParser();
   function incrementCount() {
@@ -236,6 +237,18 @@ export const ProductDetails = () => {
       </div>
       <div className=" row shipping-disclaimertext text-center">
         Free shipping on orders above ₹5000 Delivery in 5-7 business days.
+      </div>
+
+      <div className="row ">
+        <div className=" pair-with-heading text-center">
+          YOU CAN PAIR IT WITH
+        </div>
+        <div className="row "></div>
+      </div>
+
+      <div className="row ">
+        <div className=" simlair-heading text-center">SIMILAIR PRODUCTS</div>
+        <div className="row "></div>
       </div>
 
       <div className="review-heading text-center">CUSTOMER REVIEWS</div>
