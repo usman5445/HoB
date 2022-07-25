@@ -201,3 +201,12 @@
     
         color: #B1B1B1;
 }
+
+.pair-with-heading, .simlair-heading{
+    font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 32px;
+        line-height: 28px;
+        padding: 1rem 0rem;
+}
