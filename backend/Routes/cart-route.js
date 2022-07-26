@@ -7,7 +7,7 @@ const STORENAME = process.env.STORENAME;
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const STOREFRONT_ACCESS_TOKEN = process.env.STOREFRONT_ACCESS_TOKEN;
 
-//creates new cart
+//creates new cart {accessToken}
 router.post("/newcart", (req, res) => {
   axios
     .post(
@@ -20,6 +20,7 @@ router.post("/newcart", (req, res) => {
             }){
               cart{
                 id
+                checkoutUrl
                 createdAt
                 updatedAt
                 buyerIdentity {
@@ -60,6 +61,7 @@ router.post("/getcart", (req, res) => {
       id: "${req.body.cartId}"
     ) {
       id
+      checkoutUrl
       createdAt
       updatedAt
       lines(first:100) {
@@ -70,6 +72,22 @@ router.post("/getcart", (req, res) => {
             merchandise {
               ... on ProductVariant {
                 id
+                      title
+                    image{
+                      url
+                    }
+                    priceV2{
+                      amount
+                      currencyCode
+                    }
+                    unitPrice{
+                      amount
+                      currencyCode
+                    }
+                    product{
+                      title  
+                      description
+                    }
               }
             }
             attributes {
@@ -134,6 +152,7 @@ router.post("/addtocart", (req, res) => {
         ]){
           cart{
             id
+            checkoutUrl
             createdAt
             updatedAt
             lines(first:100) {
@@ -149,6 +168,10 @@ router.post("/addtocart", (req, res) => {
                       url
                     }
                     unitPrice{
+                      amount
+                      currencyCode
+                    }
+                    priceV2{
                       amount
                       currencyCode
                     }
@@ -222,6 +245,7 @@ router.post("/removefromcart", (req, res) => {
         ]){
           cart{
             id
+            checkoutUrl
             createdAt
             updatedAt
             lines(first:100) {
@@ -237,6 +261,10 @@ router.post("/removefromcart", (req, res) => {
                       url
                     }
                     unitPrice{
+                      amount
+                      currencyCode
+                    }
+                    priceV2{
                       amount
                       currencyCode
                     }
@@ -313,6 +341,7 @@ router.post("/updateQuantity", (req, res) => {
         ]){
           cart{
             id
+            checkoutUrl
             createdAt
             updatedAt
             lines(first:100) {
@@ -328,6 +357,10 @@ router.post("/updateQuantity", (req, res) => {
                       url
                     }
                     unitPrice{
+                      amount
+                      currencyCode
+                    }
+                    priceV2{
                       amount
                       currencyCode
                     }
