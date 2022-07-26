@@ -11,7 +11,7 @@ import cross from "../../assests/X.svg";
 import smile from "../../assests/smilegreylogo.svg";
 import logo from "../../assests/logo.svg";
 import Profile from "../../assests/Profile.svg";
-
+import { useNavigate } from "react-router-dom";
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -31,8 +31,16 @@ function MyVerticallyCenteredModal(props) {
 const NavSide = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [sidebar, setSidebar] = useState(false);
-
+  const navigate = useNavigate();
   const showSidebar = () => setSidebar(!sidebar);
+
+  function handleGoToCart() {
+    if (!JSON.parse(localStorage.getItem("customer"))?.accessToken) {
+      setModalShow(true);
+    } else {
+      navigate("/cart");
+    }
+  }
 
   return (
     <>
@@ -55,7 +63,7 @@ const NavSide = () => {
           </div>
           <form className="d-flex" role="search">
             <img className="me-3" src={Search} alt="..."></img>
-            <a href="/cart">
+            <a onClick={handleGoToCart}>
               <img className="me-3" src={cart} alt="..."></img>
             </a>
             <img className="me-3" src={heart} alt="..."></img>

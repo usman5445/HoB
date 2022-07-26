@@ -18,109 +18,171 @@ import visa from "../../assests/visa.svg";
 import olamoney from "../../assests/olamoney.svg";
 import minus from "../../assests/minus.svg";
 import { useEffect, useState } from "react";
+import {
+  getCart,
+  newCart,
+  removeFromCart,
+  updateQuantity,
+} from "../../api/cart";
+import { Loader } from "../Loader";
 const Cart = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [cartData, setCartData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  function fetchCartItems() {
+    setIsLoading(true);
+    const cartId = JSON.parse(localStorage.getItem("cart"))?.id;
+    getCart(cartId)
+      .then((resp) => {
+        setCartItems(resp.data.data?.cart?.lines?.edges);
+        setCartData(resp.data.data?.cart);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }
+
+  function handleQuantity(opration, productLineId, previousQuantity) {
+    setIsLoading(true);
+    let quantity = previousQuantity;
+    switch (opration) {
+      case "decrement": {
+        quantity > 1 && quantity--;
+        break;
+      }
+      case "increment": {
+        quantity++;
+        break;
+      }
+    }
+    console.log(quantity);
+    updateQuantity(
+      JSON.parse(localStorage.getItem("cart")).id,
+      productLineId,
+      quantity
+    )
+      .then((resp) => {
+        console.log(resp);
+        setCartData(resp.data.data?.cartLinesUpdate.cart);
+        setCartItems(resp.data.data?.cartLinesUpdate.cart.lines.edges);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }
+
+  function handleDelete(productLineId) {
+    setIsLoading(true);
+    removeFromCart(JSON.parse(localStorage.getItem("cart")).id, productLineId)
+      .then((resp) => {
+        setCartData(resp.data.data?.cartLinesRemove.cart);
+        setCartItems(resp.data.data?.cartLinesRemove.cart.lines.edges);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem("cart"))?.id) {
+      const accessToken = JSON.parse(
+        localStorage.getItem("customer")
+      ).accessToken;
+      newCart(accessToken).then((resp) => {
+        localStorage.setItem("cart", JSON.stringify(resp.data.cartCreate.cart));
+      });
+    }
+
+    fetchCartItems();
+  }, []);
   return (
     <>
       <NavSide />
+      <Loader isTrue={isLoading} />
       <div className="CartContainer ">
         <div className="CartHeading">MY CART</div>
-        <div className="items">3 Items</div>
-        <div
-          className="card Cartcard d-flex  align-items-center flex-row"
-          style={{ width: "100vw" }}
-        >
-          <div className="CartImgCont ">
-            <img src={blacktshirt} alt="..." />
-          </div>
-          <div className="CartDetailsCont">
-            <div className="TshirtsName">Super Cool T-shirt</div>
-            <div className="price">Rs. 500.00</div>
-            <div className="size">Size: S</div>
-            <div className="colour">Colour: Black</div>
-            <div className="deleteimg">
-              <img src={Deleteicon} alt="..."></img>
-            </div>
-            <div className="heartimg">
-              <img src={hearticon} alt="..."></img>
-            </div>
-            <div className="quantitycard d-flex justify-content-around align-items-center flex-row">
-              <div className="minusbutton">
-                <img src={minus} alt="..."></img>
-              </div>
-              <div className="quantityno ">5</div>
+        <div className="items">{cartItems.length} Items</div>
+        {cartItems.length ? (
+          <>
+            {cartItems.map((item, index) => {
+              return (
+                <div
+                  className="card Cartcard d-flex  align-items-center flex-row"
+                  style={{ width: "100vw" }}
+                  key={index}
+                >
+                  <div className="CartImgCont ">
+                    <img src={item.node.merchandise.image.url} alt="..." />
+                  </div>
+                  <div className="CartDetailsCont">
+                    <div className="TshirtsName">
+                      {item.node.merchandise.product.title}
+                    </div>
+                    <div className="price">
+                      Rs. {item.node.merchandise.priceV2.amount}
+                    </div>
+                    <div className="size">
+                      Size: {item.node.merchandise.title}
+                    </div>
+                    <div className="colour">Colour: Black</div>
+                    <div
+                      onClick={() => handleDelete(item.node?.id)}
+                      className="deleteimg"
+                    >
+                      <img src={Deleteicon} alt="..."></img>
+                    </div>
+                    <div className="heartimg">
+                      <img src={hearticon} alt="..."></img>
+                    </div>
+                    <div className="quantitycard d-flex justify-content-around align-items-center flex-row">
+                      <div
+                        onClick={() =>
+                          handleQuantity(
+                            "decrement",
+                            item.node?.id,
+                            item.node.quantity
+                          )
+                        }
+                        className="minusbutton"
+                      >
+                        <img src={minus} alt="..."></img>
+                      </div>
+                      <div className="quantityno ">{item.node.quantity}</div>
 
-              <div className="plusbutton">
-                <img src={add} alt="..."></img>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="card Cartcard d-flex  align-items-center flex-row"
-          style={{ width: "100vw" }}
-        >
-          <div className="CartImgCont">
-            <img src={blacktshirt} alt="..." />
-          </div>
-          <div className="CartDetailsCont">
-            <div className="TshirtsName">Super Cool T-shirt</div>
-            <div className="price">Rs. 500.00</div>
-            <div className="size">Size: S</div>
-            <div className="colour">Colour: Black</div>
-            <div className="deleteimg">
-              <img src={Deleteicon} alt="..."></img>
-            </div>
-            <div className="heartimg">
-              <img src={hearticon} alt="..."></img>
-            </div>
-            <div className="quantitycard d-flex justify-content-around align-items-center flex-row">
-              <div className="minusbutton">
-                <img src={minus} alt="..."></img>
-              </div>
-              <div className="quantityno ">5</div>
-              <div className="plusbutton">
-                <img src={add} alt="..."></img>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="card Cartcard d-flex  align-items-center flex-row"
-          style={{ width: "100vw" }}
-        >
-          <div className="CartImgCont">
-            <img src={blacktshirt} alt="..." />
-          </div>
-          <div className="CartDetailsCont">
-            <div className="TshirtsName">Super Cool T-shirt</div>
-            <div className="price">Rs. 500.00</div>
-            <div className="size">Size: S</div>
-            <div className="colour">Colour: Black</div>
-            <div className="deleteimg">
-              <img src={Deleteicon} alt="..."></img>
-            </div>
-            <div className="heartimg">
-              <img src={hearticon} alt="..."></img>
-            </div>
-            <div className="quantitycard d-flex justify-content-around align-items-center flex-row">
-              <div className="minusbutton">
-                <img src={minus} alt="..."></img>
-              </div>
-              <div className="quantityno ">4</div>
-              <div className="plusbutton">
-                {" "}
-                <img src={add} alt="..."></img>
-              </div>
-            </div>
-          </div>
-        </div>
+                      <div
+                        onClick={() =>
+                          handleQuantity(
+                            "increment",
+                            item.node?.id,
+                            item.node.quantity
+                          )
+                        }
+                        className="plusbutton"
+                      >
+                        <img src={add} alt="..."></img>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <h2>no items here</h2>
+        )}
 
         <div className="discountCont my-2">
           <div className="discountText mx-3">Add a discount code</div>
           <div className="discount wrapper d-flex  justify-content-center align-items-center flex-row mx-3 my-2">
             <input
               type="text"
-              class="form-control mx-1"
+              className="form-control mx-1"
               style={{ height: "3.7rem" }}
             />
             <button
@@ -140,42 +202,52 @@ const Cart = () => {
             </button>
           </div>
         </div>
-        <div className="CArtloginCont my-2 mx-3 d-flex  justify-content-center align-items-center flex-column">
-          <div className="discountText my-3">
-            Login to use your personal offers!
+        {!localStorage.getItem("customer") && (
+          <div className="CArtloginCont my-2 mx-3 d-flex  justify-content-center align-items-center flex-column">
+            <div className="discountText my-3">
+              Login to use your personal offers!
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary knowmore  "
+              style={{
+                background: "black",
+                borderColor: "yellow",
+                borderWidth: "3px",
+                width: "23rem",
+                height: "3.7rem",
+                fontSize: "1.1rem",
+              }}
+            >
+              LOG IN
+            </button>
           </div>
-          <button
-            type="button"
-            className="btn btn-primary knowmore  "
-            style={{
-              background: "black",
-              borderColor: "yellow",
-              borderWidth: "3px",
-              width: "23rem",
-              height: "3.7rem",
-              fontSize: "1.1rem",
-            }}
-          >
-            LOG IN
-          </button>
-        </div>
+        )}
         <div className="totalValueCont my-4 mx-3">
           <div className="CartValueWrapper d-flex justify-content-between my-2">
             <div className="CartValueWrapperFieldName">Order Value</div>
-            <div className="CartValueWrapperPrice">Rs. 1,500.00</div>
+            <div className="CartValueWrapperPrice">
+              Rs. {cartData.cost?.subtotalAmount?.amount || 0}
+            </div>
           </div>
           <div className="CartValueWrapper d-flex justify-content-between my-2">
             <div className="CartValueWrapperFieldName">GST</div>
-            <div className="CartValueWrapperPrice">Rs. 250.00</div>
+            <div className="CartValueWrapperPrice">
+              Rs. {cartData.cost?.totalTaxAmount || 0}
+            </div>
           </div>
           <div className="CartValueWrapper d-flex justify-content-between my-2">
             <div className="CartValueWrapperFieldName">Shipping Charges</div>
-            <div className="CartValueWrapperPrice">Rs. 200.00</div>
+            <div className="CartValueWrapperPrice">
+              Rs. {cartData.cost?.totalDutyAmount || 0}
+            </div>
           </div>
           <hr></hr>
           <div className="CartValueWrapper d-flex justify-content-between my-2 totalvalue">
             <div className="CartValueWrapperFieldName">Total</div>
-            <div className="CartValueWrapperPrice">Rs. 1750.00</div>
+            <div className="CartValueWrapperPrice">
+              Rs. {cartData.cost?.totalAmount?.amount}
+            </div>
           </div>
         </div>
         <div className="CartPaymentCont mx-3 my-4">
@@ -279,23 +351,30 @@ const Cart = () => {
       >
         <div className="Totalpaymentdetails  d-flex  justify-content-center align-items-center flex-column mx-4">
           <div className="TotalPayment">Total Amount</div>
-          <div className="TotalPrice">Rs. 1750.00</div>
+          <div className="TotalPrice">
+            Rs. {cartData.cost?.totalAmount?.amount}
+          </div>
         </div>
-        <button
-          type="button"
-          className="btn btn-primary knowmore mx-4"
-          style={{
-            background: "#FFDF05",
-            color: "black",
-            borderColor: "black",
-            borderWidth: "3px",
-            width: "9rem",
-            height: "3.3rem",
-            fontSize: "1.1rem",
-          }}
+        <a
+          target={"_blank"}
+          href={JSON.parse(localStorage.getItem("cart"))?.checkoutUrl}
         >
-          CONTINUE
-        </button>
+          <button
+            type="button"
+            className="btn btn-primary knowmore mx-4"
+            style={{
+              background: "#FFDF05",
+              color: "black",
+              borderColor: "black",
+              borderWidth: "3px",
+              width: "9rem",
+              height: "3.3rem",
+              fontSize: "1.1rem",
+            }}
+          >
+            CONTINUE
+          </button>
+        </a>
       </div>
     </>
   );

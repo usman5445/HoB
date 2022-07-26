@@ -9,6 +9,10 @@
 .CartImgCont {
   margin: 1rem;
 }
+.CartImgCont img {
+  width: fit-content;
+  height: 147px;
+}
 .CartDetailsCont {
   font-weight: 500;
   line-height: 1.7rem;
